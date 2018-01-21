@@ -1,23 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Pipefy Apps Client.js -->
-    <script src="https://app.pipefy.com/apps/client.js"></script>
+    <meta charset="utf-8">
   </head>
   <body>
+    <script src="https://app.pipefy.com/apps/client.js"></script>
     <script>
-      PipefyApp.initCall({
-        'pipe-view': function(p, pipe) {
-          return (
-            {
-              icon: 'https://cdn.glitch.com/921750f9-5c7c-4842-b805-9b8b2579d82e%2Freact-icon.svg?1507935176075',
-              text: 'React View',
+      // Use Promise available from pipefyClient
+      var Promise = pipefyClient.Promise;
+      var ICON_WHITE = "./images/icon-white.svg";
+      var ICON_BLACK = "./images/icon.svg";
+      var ICON_GRAY = "./images/icon-gray.svg";
+
+      var ICON_PR_YELLOW = "./images/icon-pr-yellow.svg";
+      var ICON_PR_GREEN = "./images/icon-pr-green.svg";
+
+    
+
+      document.addEventListener("DOMContentLoaded", function(event) {
+        pipefyClient.initCall({
+          'card-tab': function(p, options) {
+            return {
+              icon: './images/power-cord.svg',
+              title: 'DM Consultoria',
               url: './view.html',
-              hide_create_button: false,
+              claimedAttachments: function(attachments) {
+                // Iterate by all attachment to claim attachments from Github
+                return attachments.filter(function(attachment){
+                  return attachment.url.indexOf('https://github.com') === 0;
+                });
+              },
+              buttons: []
             }
-          )
-        },
+          },
+        });
+
+
       });
     </script>
   </body>
