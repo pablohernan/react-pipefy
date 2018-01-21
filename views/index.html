@@ -1,31 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Pipefy Apps Client.js -->
+    <script src="https://app.pipefy.com/apps/client.js"></script>
   </head>
   <body>
-    <script src="https://app.pipefy.com/apps/client.js"></script>
     <script>
-
-      document.addEventListener("DOMContentLoaded", function(event) {
-        pipefyClient.initCall({
-          'card-tab': function(p, options) {
-            return {
-              icon: './images/power-cord.svg',
-              title: 'DM Consultoria',
-              url: './pipe-view.html',
-              claimedAttachments: function(attachments) {
-                // Iterate by all attachment to claim attachments from Github
-                return attachments.filter(function(attachment){
-                  return attachment.url.indexOf('https://github.com') === 0;
-                });
-              },
-              buttons: []
+      PipefyApp.initCall({
+        'pipe-view': function(p, pipe) {
+          return (
+            {
+              icon: 'https://cdn.glitch.com/921750f9-5c7c-4842-b805-9b8b2579d82e%2Freact-icon.svg?1507935176075',
+              text: 'React View',
+              url: './view.html',
+              hide_create_button: false,
             }
-          },
-        });
-
-
+          )
+        },
       });
     </script>
   </body>
